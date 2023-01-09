@@ -9,19 +9,19 @@ def csv2sql(filename):
     df.to_sql(filename[:-4], conn, if_exists='replace', index=False)
 
 files =    ['circuits.csv',
+            'seasons.csv',
+            'constructors.csv',
+            'drivers.csv',
+            'races.csv',
+            'status.csv',
             'constructor_results.csv',
             'constructor_standings.csv',
-            'constructors.csv',
             'driver_standings.csv',
-            'drivers.csv',
             'lap_times.csv',
             'pit_stops.csv',
             'qualifying.csv',
-            'races.csv',
             'results.csv',
-            'seasons.csv',
-            'sprint_results.csv',
-            'status.csv']
+            'sprint_results.csv']
 
 remote_url = 'http://ergast.com/downloads/f1db_csv.zip'
 local_file = 'f1db_csv.zip'
