@@ -6,3 +6,5 @@ docker run --name=pipeline-app-container -d -p 5432:5432 -e POSTGRES_PASSWORD=po
 docker start pipeline-app-container
 # Stop 
 docker stop pipeline-app-container
+# Enter into bash
+docker exec -it pipeline-app-container bash
