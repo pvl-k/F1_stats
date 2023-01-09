@@ -26,7 +26,7 @@ files =    ['circuits.csv',
 remote_url = 'http://ergast.com/downloads/f1db_csv.zip'
 local_file = 'f1db_csv.zip'
 request.urlretrieve(remote_url, local_file)
-print('Download of remote file finished...')
+print('Downloading of remote file finished...')
 
 with ZipFile('f1db_csv.zip', 'r') as zipObj:
    zipObj.extractall()
@@ -45,6 +45,6 @@ conn_url = 'postgresql://' + db_user + ':' + db_user_password + '@' + hostname
 conn = create_engine(conn_url)
 
 for i in files:
-    print(f'Loadinging of file "{i}" into DB...')
+    print(f'Loading of file "{i}" into DB...')
     csv2sql(i)
     print(f'Loading of file "{i}" into DB finished.')
