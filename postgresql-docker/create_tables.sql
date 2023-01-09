@@ -1,5 +1,5 @@
 CREATE TABLE 'circuits' (
-	'circuitId' int NOT NULL,
+	'circuitId' serial NOT NULL,
 	'circuitRef' varchar(30) NOT NULL,
 	'name' varchar(100) NOT NULL,
 	'location' varchar(30) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE 'circuits' (
 );
 
 CREATE TABLE 'constructor_results' (
-	'constructorResultsId' smallint NOT NULL,
+	'constructorResultsId' serial NOT NULL,
 	'raceId' smallint NOT NULL,
 	'constructorId' smallint NOT NULL,
 	'points' tinyint NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE 'constructor_results' (
 );
 
 CREATE TABLE 'constructor_standings' (
-	'constructorStandingsId' smallint NOT NULL,
+	'constructorStandingsId' serial NOT NULL,
 	'raceId' smallint NOT NULL,
 	'constructorId' smallint NOT NULL,
 	'points' tinyint NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE 'constructor_standings' (
 );
 
 CREATE TABLE 'constructors' (
-	'constructorId' smallint NOT NULL,
+	'constructorId' serial NOT NULL,
 	'constructorRef' varchar(20) NOT NULL,
 	'name' varchar(50) NOT NULL,
 	'nationality' varchar(15) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE 'constructors' (
 );
 
 CREATE TABLE 'driver_standings' (
-	'driverStandingsId' mediumint NOT NULL,
+	'driverStandingsId' serial NOT NULL,
 	'raceId' smallint NOT NULL,
 	'driverId' smallint NOT NULL,
 	'points' smallint NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE 'driver_standings' (
 );
 
 CREATE TABLE 'drivers' (
-	'driverId' smallint NOT NULL,
+	'driverId' serial NOT NULL,
 	'driverRef' varchar(20) NOT NULL,
 	'number' tinyint,
 	'code' varchar(4),
@@ -65,7 +65,7 @@ CREATE TABLE 'drivers' (
 );
 
 CREATE TABLE 'lap_times' (
-	'raceId' smallint NOT NULL,
+	'raceId' serial NOT NULL,
 	'driverId' smallint NOT NULL,
 	'lap' smallint NOT NULL,
 	'position' tinyint NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE 'lap_times' (
 );
 
 CREATE TABLE 'pit_stops' (
-	'raceId' smallint NOT NULL,
+	'raceId' serial NOT NULL,
 	'driverId' smallint NOT NULL,
 	'stop' tinyint NOT NULL,
 	'lap' smallint NOT NULL,
@@ -86,7 +86,7 @@ CREATE TABLE 'pit_stops' (
 );
 
 CREATE TABLE 'qualifying' (
-	'qualifyId' smallint NOT NULL,
+	'qualifyId' serial NOT NULL,
 	'raceId' smallint NOT NULL,
 	'driverId' smallint NOT NULL,
 	'constructorId' smallint NOT NULL,
@@ -99,7 +99,7 @@ CREATE TABLE 'qualifying' (
 );
 
 CREATE TABLE 'races' (
-	'raceId' smallint NOT NULL,
+	'raceId' serial NOT NULL,
 	'year' smallint NOT NULL,
 	'round' tinyint NOT NULL,
 	'circuitId' smallint NOT NULL,
@@ -121,7 +121,7 @@ CREATE TABLE 'races' (
 );
 
 CREATE TABLE 'results' (
-	'resultId' mediumint NOT NULL,
+	'resultId' serial NOT NULL,
 	'raceId' smallint NOT NULL,
 	'driverId' smallint NOT NULL,
 	'constructorId' smallint NOT NULL,
@@ -143,13 +143,13 @@ CREATE TABLE 'results' (
 );
 
 CREATE TABLE 'seasons' (
-	'year' smallint NOT NULL,
+	'year' serial NOT NULL,
 	'url' varchar(255) NOT NULL,
 	PRIMARY KEY ('year')
 );
 
 CREATE TABLE 'sprint_results' (
-	'resultId' mediumint NOT NULL,
+	'resultId' serial NOT NULL,
 	'raceId' smallint NOT NULL,
 	'driverId' smallint NOT NULL,
 	'constructorId' smallint NOT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE 'sprint_results' (
 );
 
 CREATE TABLE 'status' (
-	'statusId' smallint NOT NULL,
+	'statusId' serial NOT NULL,
 	'status' varchar(255) NOT NULL,
 	PRIMARY KEY ('statusId')
 );
