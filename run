@@ -1,4 +1,25 @@
 cd \python-docker\
-docker build -t test1:postgres .
-cd \postgres-docker\
 docker build -t test1:python .
+cd \postgres-docker\
+docker build -t test1:postgres .
+
+#docker run -it -e POSTGRES_PASSWORD=postgres test1:postgres -d -p 5432:5432 postgres
+
+#docker run -it -e POSTGRES_PASSWORD=postgres test1:postgres -d postgres
+
+
+docker build -t test:postgres .
+docker run --name test:postgres -p 5432:5432
+
+
+docker run --name test-postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d postgres:13
+
+
+# Build
+docker build -t pipeline-app .
+# First start
+docker run --name=pipeline-app-container -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres pipeline-app
+# Next starts
+docker start pipeline-app-container
+# Stop 
+docker stop pipeline-app-container

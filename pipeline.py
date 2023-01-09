@@ -36,10 +36,10 @@ with open('db_user.txt', 'r', encoding='utf-8') as fp:
 with open('db_user_password.txt', 'r', encoding='utf-8') as fp:
     db_user_password = fp.read().rstrip()
 
-with open('db_name.txt', 'r', encoding='utf-8') as fp:
-    db_name = fp.read().rstrip()
+with open('hostname.txt', 'r', encoding='utf-8') as fp:
+    hostname = fp.read().rstrip()
 
-conn_url = 'postgres://' + db_user + ':' + db_user_password + '@' + db_name
+conn_url = 'postgresql://' + db_user + ':' + db_user_password + '@' + hostname
 conn = create_engine(conn_url)
 
 for i in files:
