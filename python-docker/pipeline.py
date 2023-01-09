@@ -24,22 +24,22 @@ files =    ['circuits.csv',
             'status.csv']
 
 remote_url = 'http://ergast.com/downloads/f1db_csv.zip'
-local_file = '/home/pvlk/f1stats/f1db_csv.zip'
+local_file = 'f1db_csv.zip'
 request.urlretrieve(remote_url, local_file)
 
 with ZipFile('f1db_csv.zip', 'r') as zipObj:
    zipObj.extractall()
 
-with open('mysql_user.txt', 'r', encoding='utf-8') as fp:
-    mysql_user = fp.read().rstrip()
+with open('db_user.txt', 'r', encoding='utf-8') as fp:
+    db_user = fp.read().rstrip()
 
-with open('mysql_password.txt', 'r', encoding='utf-8') as fp:
-    mysql_password = fp.read().rstrip()
+with open('db_user_password.txt', 'r', encoding='utf-8') as fp:
+    db_user_password = fp.read().rstrip()
 
-with open('mysql_base.txt', 'r', encoding='utf-8') as fp:
-    mysql_base = fp.read().rstrip()
+with open('db_name.txt', 'r', encoding='utf-8') as fp:
+    db_name = fp.read().rstrip()
 
-conn_url = 'mysql://' + mysql_user + ':' + mysql_password + '@' + mysql_base
+conn_url = 'postgres://' + db_user + ':' + db_user_password + '@' + db_name
 conn = create_engine(conn_url)
 
 for i in files:

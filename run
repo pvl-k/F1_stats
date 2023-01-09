@@ -1,0 +1,4 @@
+cd \python-docker\
+docker build -t test1:postgres .
+cd \postgres-docker\
+docker build -t test1:python .
