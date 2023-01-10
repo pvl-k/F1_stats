@@ -8,8 +8,8 @@ def csv2sql(filename):
     df = pd.read_csv(filename)
     df.to_sql(filename[:-4], conn, if_exists='replace', index=False)
 
-files =    ['circuits.csv',
-            'seasons.csv',
+files =    ['seasons.csv',
+            'circuits.csv',
             'constructors.csv',
             'drivers.csv',
             'races.csv',
