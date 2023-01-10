@@ -9,11 +9,12 @@ Data loads to a database in docker-container PostgreSQL with Python3 (for ETL pr
 # For first start docker container:
 >docker run --name=pipeline-app-container -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres pipeline-app
 
-# After first start you need to enter into bash and next run ETL python-script:
+# After first start you need to enter into bash:
 >docker exec -it pipeline-app-container bash
+# and next run ETL python-script:
 >python3 pipeline.py
 
-# For next starts:
+# For all next starts:
 >docker start pipeline-app-container
 
 # For stops:
