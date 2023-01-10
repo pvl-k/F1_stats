@@ -8,12 +8,11 @@ def csv2sql(filename):
     df = pd.read_csv(filename)
     df.to_sql(filename[:-4], conn, if_exists='replace', index=False)
 
-files =    ['seasons.csv',
+files =    ['constructors.csv',
             'circuits.csv',
-            'constructors.csv',
             'drivers.csv',
+            'seasons.csv',
             'races.csv',
-            'status.csv',
             'constructor_results.csv',
             'constructor_standings.csv',
             'driver_standings.csv',
@@ -21,16 +20,19 @@ files =    ['seasons.csv',
             'pit_stops.csv',
             'qualifying.csv',
             'results.csv',
-            'sprint_results.csv']
+            'sprint_results.csv',
+            'status.csv']
 
 remote_url = 'http://ergast.com/downloads/f1db_csv.zip'
 local_file = 'f1db_csv.zip'
+print('Downloading of remote file...', end='')
 request.urlretrieve(remote_url, local_file)
-print('Downloading of remote file finished...')
+print('finished.')
 
+print('Unpacking of the downloaded file...', end='')
 with ZipFile('f1db_csv.zip', 'r') as zipObj:
    zipObj.extractall()
-print('Unpacking of the downloaded file finished...')
+print('finished.')
 
 with open('db_user.txt', 'r', encoding='utf-8') as fp:
     db_user = fp.read().rstrip()
@@ -45,6 +47,6 @@ conn_url = 'postgresql://' + db_user + ':' + db_user_password + '@' + hostname
 conn = create_engine(conn_url)
 
 for i in files:
-    print(f'Loading of file "{i}" into DB...')
+    print(f'Loading of file "{i}" into DB...', end='')
     csv2sql(i)
-    print(f'Loading of file "{i}" into DB finished.')
+    print('finished.')
