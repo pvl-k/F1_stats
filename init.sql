@@ -1,18 +1,19 @@
 CREATE TABLE circuits (
-	circuitId serial NOT NULL,
+	circuitId int NOT NULL,
 	circuitRef varchar(30) NOT NULL,
 	name varchar(100) NOT NULL,
 	location varchar(30) NOT NULL,
 	country varchar(30) NOT NULL,
-	lat FLOAT NOT NULL,
-	lng FLOAT NOT NULL,
+	lat DOUBLE PRECISION NOT NULL,
+	lng DOUBLE PRECISION NOT NULL,
 	alt smallint,
 	url varchar(255) NOT NULL,
 	PRIMARY KEY (circuitId)
 );
 
+
 CREATE TABLE constructor_results (
-	constructorResultsId serial NOT NULL,
+	constructorResultsId smallint NOT NULL,
 	raceId smallint NOT NULL,
 	constructorId smallint NOT NULL,
 	points smallint NOT NULL,
@@ -20,8 +21,9 @@ CREATE TABLE constructor_results (
 	PRIMARY KEY (constructorResultsId)
 );
 
+
 CREATE TABLE constructor_standings (
-	constructorStandingsId serial NOT NULL,
+	constructorStandingsId smallint NOT NULL,
 	raceId smallint NOT NULL,
 	constructorId smallint NOT NULL,
 	points smallint NOT NULL,
@@ -31,8 +33,9 @@ CREATE TABLE constructor_standings (
 	PRIMARY KEY (constructorStandingsId)
 );
 
+
 CREATE TABLE constructors (
-	constructorId serial NOT NULL,
+	constructorId smallint NOT NULL,
 	constructorRef varchar(20) NOT NULL,
 	name varchar(50) NOT NULL,
 	nationality varchar(15) NOT NULL,
@@ -40,8 +43,9 @@ CREATE TABLE constructors (
 	PRIMARY KEY (constructorId)
 );
 
+
 CREATE TABLE driver_standings (
-	driverStandingsId serial NOT NULL,
+	driverStandingsId int NOT NULL,
 	raceId smallint NOT NULL,
 	driverId smallint NOT NULL,
 	points smallint NOT NULL,
@@ -51,8 +55,9 @@ CREATE TABLE driver_standings (
 	PRIMARY KEY (driverStandingsId)
 );
 
+
 CREATE TABLE drivers (
-	driverId serial NOT NULL,
+	driverId smallint NOT NULL,
 	driverRef varchar(20) NOT NULL,
 	number smallint,
 	code varchar(4),
@@ -64,8 +69,9 @@ CREATE TABLE drivers (
 	PRIMARY KEY (driverId)
 );
 
+
 CREATE TABLE lap_times (
-	raceId serial NOT NULL,
+	raceId smallint NOT NULL,
 	driverId smallint NOT NULL,
 	lap smallint NOT NULL,
 	position smallint NOT NULL,
@@ -74,19 +80,21 @@ CREATE TABLE lap_times (
 	PRIMARY KEY (raceId)
 );
 
+
 CREATE TABLE pit_stops (
-	raceId serial NOT NULL,
+	raceId smallint NOT NULL,
 	driverId smallint NOT NULL,
 	stop smallint NOT NULL,
 	lap smallint NOT NULL,
-	time TIME NOT NULL,
+	time TIME(0) NOT NULL,
 	duration varchar(10) NOT NULL,
 	milliseconds int NOT NULL,
 	PRIMARY KEY (raceId)
 );
 
+
 CREATE TABLE qualifying (
-	qualifyId serial NOT NULL,
+	qualifyId smallint NOT NULL,
 	raceId smallint NOT NULL,
 	driverId smallint NOT NULL,
 	constructorId smallint NOT NULL,
@@ -98,30 +106,32 @@ CREATE TABLE qualifying (
 	PRIMARY KEY (qualifyId)
 );
 
+
 CREATE TABLE races (
-	raceId serial NOT NULL,
+	raceId smallint NOT NULL,
 	year smallint NOT NULL,
 	round smallint NOT NULL,
 	circuitId smallint NOT NULL,
 	name varchar(100) NOT NULL,
 	date DATE NOT NULL,
-	time TIME,
+	time TIME(0),
 	url varchar(255) NOT NULL,
 	fp1_date DATE,
-	fp1_time TIME,
+	fp1_time TIME(0),
 	fp2_date DATE,
-	fp2_time TIME,
+	fp2_time TIME(0),
 	fp3_date DATE,
-	fp3_time TIME,
+	fp3_time TIME(0),
 	quali_date DATE,
-	quali_time TIME,
+	quali_time TIME(0),
 	sprint_date DATE,
-	sprint_time TIME,
+	sprint_time TIME(0),
 	PRIMARY KEY (raceId)
 );
 
+
 CREATE TABLE results (
-	resultId serial NOT NULL,
+	resultId int NOT NULL,
 	raceId smallint NOT NULL,
 	driverId smallint NOT NULL,
 	constructorId smallint NOT NULL,
@@ -142,14 +152,16 @@ CREATE TABLE results (
 	PRIMARY KEY (resultId)
 );
 
+
 CREATE TABLE seasons (
-	year serial NOT NULL,
+	year smallint NOT NULL,
 	url varchar(255) NOT NULL,
 	PRIMARY KEY (year)
 );
 
+
 CREATE TABLE sprint_results (
-	resultId serial NOT NULL,
+	resultId int NOT NULL,
 	raceId smallint NOT NULL,
 	driverId smallint NOT NULL,
 	constructorId smallint NOT NULL,
@@ -168,8 +180,9 @@ CREATE TABLE sprint_results (
 	PRIMARY KEY (resultId)
 );
 
+
 CREATE TABLE status (
-	statusId serial NOT NULL,
+	statusId smallint NOT NULL,
 	status varchar(255) NOT NULL,
 	PRIMARY KEY (statusId)
 );
