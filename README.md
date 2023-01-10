@@ -1,5 +1,6 @@
 # F1_stats
-
+This project developed for Formula One fans who want to have statistics championships since 1950 and to these days.
+Data providing and downloading from [The Ergast Developer API](http://ergast.com/mrd/db/#csv).
 # Build
 docker build -t pipeline-app .
 # First start
