@@ -15,3 +15,5 @@ RUN chown -R postgres:postgres /docker-entrypoint-initdb.d/ && \
     pip3 install sqlalchemy && \
     pip install psycopg2-binary 
  #   python3 pipeline.py
+
+#  ENTRYPOINT ["python3", "pipeline.py"]
