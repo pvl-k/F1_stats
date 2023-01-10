@@ -3,22 +3,22 @@ This project developed for Formula One fans who want to have statistics champion
 Data provides and downloads from [The Ergast Developer API](http://ergast.com/mrd/db/#csv).
 Data loads to a database in docker-container PostgreSQL with Python3 (for ETL processes) and you have the opportunity to connect to DB from outside.
 
-# For building docker image:
+### For building docker image:
 >docker build -t pipeline-app .
 
-# For first start docker container:
+### For first start docker container:
 >docker run --name=pipeline-app-container -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres pipeline-app
 
-# After first start you need to enter into bash:
+### After first start you need to enter into bash:
 >docker exec -it pipeline-app-container bash
-# and next run ETL python-script:
+### and next run ETL python-script:
 >python3 pipeline.py
 
-# For all next starts:
+### For all next starts:
 >docker start pipeline-app-container
 
-# For stops:
+### For stops:
 >docker stop pipeline-app-container
 
-# ER model of Data:
+### ER model of Data:
 ![db_F1_Stats](https://user-images.githubusercontent.com/63403198/180854011-674cac50-82d1-4104-9bf8-580eb36fa766.png)
