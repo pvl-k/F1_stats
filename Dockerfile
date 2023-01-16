@@ -11,9 +11,9 @@ RUN chown -R postgres:postgres /docker-entrypoint-initdb.d/ && \
     apt-get update && \
     apt-get install -y python3 && \
     apt-get install -y python3-pip && \
-    pip3 install pandas && \
-    pip3 install sqlalchemy && \
-    pip install psycopg2-binary 
- #   python3 pipeline.py
+    pip3 install pandas sqlalchemy psycopg2-binary && 
+#    pip3 install sqlalchemy && \
+#    pip install psycopg2-binary 
+#    python3 pipeline.py
 
 #  ENTRYPOINT ["python3", "pipeline.py"]
