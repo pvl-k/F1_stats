@@ -58,6 +58,7 @@ conn = create_engine(conn_url)
 url = 'http://ergast.com/downloads/f1db_csv.zip'
 local_file = 'files/f1db_csv.zip'
 
+
 @flow
 def main_flow():
     url = 'http://ergast.com/downloads/f1db_csv.zip'
