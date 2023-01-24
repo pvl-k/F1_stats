@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from zipfile import ZipFile
 from urllib import request
 from prefect import flow, task
-import os
+# import os
 
 # os.chdir(r'.')
 # os.listdir()
@@ -22,14 +22,9 @@ def exctract_data(url: str, zipfile: str):
         zipObj.extractall('files')
 
 @task()
-def create_dataframes(filenames):
+def load_data(filenames):
     for file in filenames:
         pd.read_csv(f'files/{file}').to_sql(file[:-4], conn, if_exists='replace', index=False)
-        # print(file)
-        # file = pd.read_csv(f'files/{file}')
-        # file.to_sql(file, conn, if_exists='replace', index=False)
-        # print(file)
-        # {file[:-4]}.to_sql(file[:-4], conn, if_exists='replace', index=False)
 
 # @task()
 # def load_data(filenames):
@@ -61,12 +56,11 @@ local_file = 'files/f1db_csv.zip'
 
 @flow
 def main_flow():
-    url = 'http://ergast.com/downloads/f1db_csv.zip'
-    local_file = 'files/f1db_csv.zip'
+    # url = 'http://ergast.com/downloads/f1db_csv.zip'
+    # local_file = 'files/f1db_csv.zip'
     exctract_data(url, local_file)
-    create_dataframes(files)
-    # load_data(files)
+    # create_dataframes(files)
+    load_data(files)
 
 if __name__ == '__main__':
-    # main_flow('http://ergast.com/downloads/f1db_csv.zip', 'f1db_csv.zip', ['constructors.csv', 'circuits.csv', 'drivers.csv', 'seasons.csv', 'races.csv', 'constructor_results.csv', 'constructor_standings.csv', 'driver_standings.csv', 'lap_times.csv', 'pit_stops.csv', 'qualifying.csv', 'results.csv', 'sprint_results.csv', 'status.csv'])
     main_flow()
