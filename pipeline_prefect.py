@@ -8,12 +8,12 @@ import os
 # os.chdir(r'.')
 # os.listdir()
 
-# with open("db_user.txt", 'r', encoding='utf-8') as fp:
-#     db_user = fp.read().rstrip()
-# with open('db_user_password.txt', 'r', encoding='utf-8') as fp:
-#     db_user_password = fp.read().rstrip()
-# with open('hostname.txt', 'r', encoding='utf-8') as fp:
-#     hostname = fp.read().rstrip()
+with open('credentials/db_user.txt', 'r', encoding='utf-8') as fp:
+    db_user = fp.read().rstrip()
+with open('credentials/db_user_password.txt', 'r', encoding='utf-8') as fp:
+    db_user_password = fp.read().rstrip()
+with open('credentials/hostname.txt', 'r', encoding='utf-8') as fp:
+    hostname = fp.read().rstrip()
 
 @task()
 def exctract_data(url: str, zipfile: str):
@@ -53,8 +53,8 @@ files =    ['constructors.csv',
             'sprint_results.csv',
             'status.csv']
 
-# conn_url = 'postgresql://' + db_user + ':' + db_user_password + '@' + hostname
-conn = create_engine('postgresql://postgres:fyqJJVeCsj4BoF17@db.bavihvcdygxxdrvdvxcn.supabase.co/postgres')
+conn_url = 'postgresql://' + db_user + ':' + db_user_password + '@' + hostname
+conn = create_engine(conn_url)
 url = 'http://ergast.com/downloads/f1db_csv.zip'
 local_file = 'files/f1db_csv.zip'
 
