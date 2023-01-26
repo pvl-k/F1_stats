@@ -10,4 +10,4 @@ COPY /cred /opt/prefect/flows/credentials/
 
 WORKDIR /opt/prefect/flows/
 
-RUN prefect deployment build flows/pipeline_prefect.py:main_flow -n etl_f1_stats --cron "0 23 * * 4-7" -a
+RUN prefect deployment build pipeline_prefect.py:main_flow -n etl_f1_stats --cron "0 23 * * 4-7" -a

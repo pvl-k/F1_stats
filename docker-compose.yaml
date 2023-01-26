@@ -3,6 +3,7 @@ services:
 
   prefect_etl:
     build: ./prefect
+    image: pvlko/prefect_f1_stats:latest
     tty: true
     ports:
       - 4200:4200
@@ -10,6 +11,7 @@ services:
 
   postgres_database:
     build: ./postgres
+    image: pvlko/prefect_f1_stats:latest
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -18,4 +20,3 @@ services:
       - 5432:5432
     restart: always
     hostname: postgres
-
