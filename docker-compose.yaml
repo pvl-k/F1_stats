@@ -1,0 +1,20 @@
+version: '3'
+services:
+
+  prefect_etl:
+    build: ./prefect
+    tty: true
+    ports:
+      - 4200:4200
+
+  postgres_database:
+    build: ./postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - 5432:5432
+    restart: always
+    # command: -p 5433
+

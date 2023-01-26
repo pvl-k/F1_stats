@@ -3,6 +3,7 @@ from sqlalchemy import create_engine
 from zipfile import ZipFile
 from urllib import request
 from prefect import flow, task
+from prefect.task_runners import SequentialTaskRunner
 # import os
 
 # os.chdir(r'.')
@@ -15,14 +16,16 @@ with open('credentials/db_user_password.txt', 'r', encoding='utf-8') as fp:
 with open('credentials/hostname.txt', 'r', encoding='utf-8') as fp:
     hostname = fp.read().rstrip()
 
-@task()
+@task(retries=5, retry_delay_seconds=180)
 def exctract_data(url: str, zipfile: str):
+    """Extract data from URL and create DataFrames"""
     request.urlretrieve(url, zipfile)
     with ZipFile(zipfile, 'r') as zipObj:
         zipObj.extractall('files')
 
 @task()
 def load_data(filenames):
+    """Load DataFrames to Tables""""
     for file in filenames:
         pd.read_csv(f'files/{file}').to_sql(file[:-4], conn, if_exists='replace', index=False)
 
@@ -55,7 +58,7 @@ local_file = 'files/f1db_csv.zip'
 
 
 @flow
-def main_flow():
+def main_flow(task_runner=SequentialTaskRunner()):
     # url = 'http://ergast.com/downloads/f1db_csv.zip'
     # local_file = 'files/f1db_csv.zip'
     exctract_data(url, local_file)
