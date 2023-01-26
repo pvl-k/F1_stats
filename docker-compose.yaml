@@ -6,6 +6,7 @@ services:
     tty: true
     ports:
       - 4200:4200
+    hostname: prefect
 
   postgres_database:
     build: ./postgres
@@ -16,5 +17,5 @@ services:
     ports:
       - 5432:5432
     restart: always
-    # command: -p 5433
+    hostname: postgres
 

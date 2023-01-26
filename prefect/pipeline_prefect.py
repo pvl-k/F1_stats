@@ -9,25 +9,25 @@ from prefect.task_runners import SequentialTaskRunner
 # os.chdir(r'.')
 # os.listdir()
 
-with open('credentials/db_user.txt', 'r', encoding='utf-8') as fp:
+with open('/opt/prefect/flows/credentials/db_user.txt', 'r', encoding='utf-8') as fp:
     db_user = fp.read().rstrip()
-with open('credentials/db_user_password.txt', 'r', encoding='utf-8') as fp:
+with open('/opt/prefect/flows/credentials/db_user_password.txt', 'r', encoding='utf-8') as fp:
     db_user_password = fp.read().rstrip()
-with open('credentials/hostname.txt', 'r', encoding='utf-8') as fp:
+with open('/opt/prefect/flows/credentials/hostname.txt', 'r', encoding='utf-8') as fp:
     hostname = fp.read().rstrip()
 
-@task(retries=5, retry_delay_seconds=180)
+@task(log_prints=True, retries=5, retry_delay_seconds=180)
 def exctract_data(url: str, zipfile: str):
     """Extract data from URL and create DataFrames"""
     request.urlretrieve(url, zipfile)
     with ZipFile(zipfile, 'r') as zipObj:
-        zipObj.extractall('files')
+        zipObj.extractall('/opt/prefect/flows/files')
 
-@task()
+@task(log_prints=True)
 def load_data(filenames):
-    """Load DataFrames to Tables""""
+    """Load DataFrames to Tables"""
     for file in filenames:
-        pd.read_csv(f'files/{file}').to_sql(file[:-4], conn, if_exists='replace', index=False)
+        pd.read_csv(f'/opt/prefect/flows/files/{file}').to_sql(file[:-4], conn, if_exists='replace', index=False)
 
 # @task()
 # def load_data(filenames):
@@ -54,11 +54,11 @@ files =    ['constructors.csv',
 conn_url = 'postgresql://' + db_user + ':' + db_user_password + '@' + hostname
 conn = create_engine(conn_url)
 url = 'http://ergast.com/downloads/f1db_csv.zip'
-local_file = 'files/f1db_csv.zip'
+local_file = '/opt/prefect/flows/files/f1db_csv.zip'
 
 
-@flow
-def main_flow(task_runner=SequentialTaskRunner()):
+@flow(task_runner=SequentialTaskRunner())
+def main_flow():
     # url = 'http://ergast.com/downloads/f1db_csv.zip'
     # local_file = 'files/f1db_csv.zip'
     exctract_data(url, local_file)

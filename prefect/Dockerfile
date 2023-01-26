@@ -3,12 +3,12 @@ FROM prefecthq/prefect:2.7.7-python3.9
 COPY prefect-requirements.txt . 
 
 RUN pip install -r prefect-requirements.txt --trusted-host pypi.python.org --no-cache-dir
-RUN mkdir -p /home/app/files /home/app/credentials/
+RUN mkdir -p /opt/prefect/flows/credentials/ /opt/prefect/flows/files
 
 COPY pipeline_prefect.py /opt/prefect/flows/pipeline_prefect.py
-COPY /cred /home/app/credentials/
+COPY /cred /opt/prefect/flows/credentials/
 
-WORKDIR /home/app/
+WORKDIR /opt/prefect/flows/
 # COPY pipeline.py pipeline.py
 # COPY hostname.txt hostname.txt
 # COPY db_user.txt db_user.txt
