@@ -1,8 +1,10 @@
 # F1 Stats
 This project developed for Formula One fans who want to have statistics championships since 1950 and to these days for analytics, etc.
 Data provides and downloads from [The Ergast Developer API](http://ergast.com/mrd/db/#csv).
-Data loads to a database in docker-container based Debian with PostgreSQL and Python3 (for ETL processes) and you have the opportunity to connect to DB from outside.
-
+Data loads to a database in Docker-container based Debian with PostgreSQL. 
+ETL processes built in Prefect for orchestration and scheduled runs using pandas and SQLAlchemy.
+## For building Docker containers:
+docker-compose up -d
 <!-- ### For building docker image:
 >docker build -t pipeline-app .
 
