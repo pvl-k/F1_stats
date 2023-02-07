@@ -3,7 +3,7 @@ This project developed for Formula One fans who want to have statistics champion
 Data provides and downloads from [The Ergast Developer API](http://ergast.com/mrd/db/#csv).
 Data loads to a database in Docker-container based Debian with PostgreSQL. 
 ETL processes built in Prefect for orchestration and scheduled runs using pandas and SQLAlchemy.
-## For building Docker containers:
+## For building Docker containers: 
 docker-compose up -d
 <!-- ### For building docker image:
 >docker build -t pipeline-app .
