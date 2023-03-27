@@ -1,3 +1,7 @@
+
+# user postgres
+# password :;k~/\>}Gxh8'(?|
+
 from airflow.models import DAG
 from airflow.operators.python_operator import PythonOperator
 from sqlalchemy import create_engine
@@ -25,13 +29,12 @@ db_user = 'postgres'
 db_user_password = ':;k~/\>}Gxh8'(?|'
 hostname = '10.70.240.3'
 
+# conn_url = 'postgresql://' + db_user + ':' + db_user_password + '@' + hostname
 # conn_url = my-second-project-381711:us-central1:f1-postgres
-# conn_url = "postgresql://postgres::;k~/\>}Gxh8'(?|@10.70.240.3"
-conn_url = 'postgresql://' + db_user + ':' + db_user_password + '@' + hostname
+conn_url = "postgresql://postgres::;k~/\>}Gxh8'(?|@10.70.240.3"
 conn = create_engine(conn_url)
 url = 'http://ergast.com/downloads/f1db_csv.zip'
 local_file = '/home/airflow/gcs/data/f1db_csv.zip'
-data_path = '/home/airflow/gcs/data/'
 
 default_args = {
     'owner': 'airflow',
@@ -54,12 +57,12 @@ def exctract_data(url: str, local_file: str):
     """Extract data from URL and create DataFrames"""
     request.urlretrieve(url, local_file)
     with ZipFile(local_file, 'r') as zipObj:
-        zipObj.extractall(data_path)
+        zipObj.extractall('/home/airflow/gcs/data/')
 
 def load_data(files):
     """Load DataFrames to Tables"""
     for file in files:
-        pd.read_csv({data_path} + {file}).to_sql(file[:-4], conn, if_exists='replace', index=False)
+        pd.read_csv(f'/home/airflow/gcs/data/{file}').to_sql(file[:-4], conn, if_exists='replace', index=False)
 
 exctract_data_task = PythonOperator (
     task_id = 'exctract_data_task',
