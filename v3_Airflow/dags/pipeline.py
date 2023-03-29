@@ -1,7 +1,3 @@
-
-# user postgres
-# password :;k~/\>}Gxh8'(?|
-
 from airflow.models import DAG
 from airflow.operators.python_operator import PythonOperator
 from sqlalchemy import create_engine
@@ -25,13 +21,14 @@ files =    ['constructors.csv',
             'sprint_results.csv',
             'status.csv']
 
-db_user = 'postgres'
-db_user_password = ':;k~/\>}Gxh8'(?|'
-hostname = '10.70.240.3'
+with open('/home/airflow/gcs/dags/db_user.txt', 'r', encoding='utf-8') as fp:
+    db_user = fp.read().rstrip()
+with open('/home/airflow/gcs/dags/db_user_password.txt', 'r', encoding='utf-8') as fp:
+    db_user_password = fp.read().rstrip()
+with open('/home/airflow/gcs/dags/hostname.txt', 'r', encoding='utf-8') as fp:
+    hostname = fp.read().rstrip()
 
-# conn_url = 'postgresql://' + db_user + ':' + db_user_password + '@' + hostname
-# conn_url = my-second-project-381711:us-central1:f1-postgres
-conn_url = "postgresql://postgres::;k~/\>}Gxh8'(?|@10.70.240.3"
+conn_url = 'postgresql://' + db_user + ':' + db_user_password + '@' + hostname
 conn = create_engine(conn_url)
 url = 'http://ergast.com/downloads/f1db_csv.zip'
 local_file = '/home/airflow/gcs/data/f1db_csv.zip'
