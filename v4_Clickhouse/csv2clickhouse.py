@@ -28,11 +28,12 @@ for filename in fileslist:
     
     columnNameTypes = dict(zip(columnName, columnType))
     
-    for k, v in columnNameTypes.items():
+    s = ''
+    for item in columnNameTypes:
+        s += item + ' ' + columnNameTypes[item] + ', \n'
         
         
-        
-        print(k, v)
+    print(s)
     
     
     
