@@ -30,7 +30,8 @@ for filename in fileslist:
     
     s = ''
     for item in columnNameTypes:
-        s += item + ' ' + columnNameTypes[item] + ', \n'
+        s += item + ' ' + columnNameTypes[item] + ', '
+    s = '(' + s[:-2] + ')'
         
         
     print(s)
